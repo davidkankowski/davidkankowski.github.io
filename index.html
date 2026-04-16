@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>David Kankowski | Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f9f7f4;
+    --surface: #ffffff;
+    --ink: #1a1a18;
+    --ink-2: #4a4a45;
+    --ink-3: #8a8a83;
+    --accent: #1f3f2e;
+    --accent-light: #e8f0eb;
+    --accent-mid: #4a7c5e;
+    --rule: #e2e0da;
+    --tag-bg: #f0ede8;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+    --max: 780px;
+    --gutter: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(249,247,244,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 var(--gutter);
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--ink-2);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-resume {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--accent-mid);
+    padding: 0.3rem 0.85rem;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-resume:hover { background: var(--accent); color: #fff; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+  section { padding: 5rem 0; }
+  section + section { border-top: 1px solid var(--rule); }
+
+  h2.section-title {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    padding-top: 9rem;
+    padding-bottom: 5rem;
+    border-top: none;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: end;
+  }
+  .hero-text {}
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent-mid);
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+  #hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 500;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--ink-2);
+    max-width: 46ch;
+    margin-bottom: 2rem;
+    line-height: 1.65;
+  }
+  .hero-actions { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.65rem 1.35rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-ghost {
+    display: inline-block;
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.65rem 1.35rem;
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--ink-3); }
+
+  .hero-avatar {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--surface);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.09);
+    flex-shrink: 0;
+  }
+  .hero-avatar-placeholder {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    border: 3px solid var(--surface);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── ABOUT ── */
+  .about-body { font-size: 1.05rem; color: var(--ink-2); max-width: 60ch; }
+  .about-body p + p { margin-top: 1rem; }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 2.5rem; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 1.25rem;
+  }
+  .exp-meta { }
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    line-height: 1.5;
+    display: block;
+  }
+  .exp-location {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+    display: block;
+    margin-top: 0.2rem;
+  }
+  .exp-content h3 {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+  .exp-company {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent-mid);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .exp-desc {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    line-height: 1.65;
+    margin-bottom: 0.75rem;
+  }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    background: var(--tag-bg);
+    color: var(--ink-2);
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+  }
+
+  /* ── PROJECTS ── */
+  .project-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent-mid); transform: translateY(-2px); }
+  .project-thumb {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: block;
+    background: var(--accent-light);
+  }
+  .project-thumb-placeholder {
+    width: 100%; height: 200px;
+    background: linear-gradient(135deg, var(--accent-light) 0%, #d4e8da 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-thumb-placeholder .thumb-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent-mid);
+    letter-spacing: 0.08em;
+  }
+  .project-body { padding: 1.25rem 1.4rem 1.4rem; }
+  .project-category {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    margin-bottom: 0.4rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .project-date { color: var(--ink-3); font-size: 0.7rem; }
+  .project-body h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--ink-2);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+  .project-link {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--accent-mid);
+    display: inline-flex; align-items: center; gap: 0.25rem;
+  }
+
+  /* ── SKILLS ── */
+  .skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .skill-group h3 {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 0.85rem;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-pill {
+    font-size: 0.875rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    color: var(--ink-2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-lead { font-size: 1.1rem; color: var(--ink-2); max-width: 50ch; margin-bottom: 2.5rem; }
+  .contact-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent-mid); }
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .contact-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--accent-mid);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 2rem var(--gutter);
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-3);
+    font-family: var(--mono);
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-avatar-placeholder { display: none; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.4rem; }
+    .skill-groups { grid-template-columns: 1fr; }
+    .contact-links { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#top">DK</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-resume" href="resume.pdf" target="_blank">Resume ↗</a>
+</nav>
+
+<!-- HERO -->
+<div class="container">
+  <section id="hero">
+    <div class="hero-text fade-up">
+      <span class="hero-eyebrow">davidkankowski.github.io</span>
+      <h1>David<br>Kankowski</h1>
+      <p class="hero-sub">
+        Software engineer building thoughtful, well-crafted applications.
+        Interested in full-stack development, systems, and open source.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#projects">View Projects</a>
+        <a class="btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-avatar-placeholder fade-up" style="transition-delay:0.15s">DK</div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div class="container">
+  <section id="about">
+    <p class="section-title">About</p>
+    <div class="about-body fade-up">
+      <p>
+        Hi — I'm David, a software engineer with a passion for building
+        things that are both functional and elegant. I enjoy working across
+        the stack, from designing clean APIs to crafting responsive UIs.
+      </p>
+      <p>
+        When I'm not coding, you'll find me exploring new technologies,
+        contributing to open source, or thinking about how to make software
+        more accessible and intuitive.
+      </p>
+      <p>
+        <!-- ✏️  Update with your real school/program -->
+        Currently studying Computer Science.
+      </p>
+    </div>
+  </section>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="container">
+  <section id="experience">
+    <p class="section-title">Experience</p>
+    <div class="exp-list">
+
+      <!-- ✏️  Replace with your real experience -->
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <span class="exp-date">Summer 2024</span>
+          <span class="exp-location">Remote</span>
+        </div>
+        <div class="exp-content">
+          <h3>Software Engineering Intern</h3>
+          <span class="exp-company">Company Name</span>
+          <p class="exp-desc">
+            Built and shipped features for a production web application.
+            Collaborated with senior engineers to improve performance and
+            code quality across the codebase.
+          </p>
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-up">
+        <div class="exp-meta">
+          <span class="exp-date">2023 – Present</span>
+          <span class="exp-location">On-site</span>
+        </div>
+        <div class="exp-content">
+          <h3>Teaching Assistant</h3>
+          <span class="exp-company">University Name</span>
+          <p class="exp-desc">
+            Held weekly office hours and graded assignments for an
+            introductory programming course. Helped students debug their
+            code and understand core CS concepts.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Instruction</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- PROJECTS -->
+<div class="container">
+  <section id="projects">
+    <p class="section-title">Projects</p>
+    <div class="project-grid">
+
+      <!-- ✏️  Replace these with your real GitHub projects -->
+
+      <a class="project-card fade-up" href="https://github.com/davidkankowski" target="_blank">
+        <div class="project-thumb-placeholder">
+          <span class="thumb-label">PROJECT ONE</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Full-Stack <span class="project-date">2025</span></div>
+          <h3>Your First Project</h3>
+          <p class="project-desc">
+            Replace this with a real project from your GitHub. Describe what it does,
+            why you built it, and what's interesting about the implementation.
+          </p>
+          <div class="tag-row" style="margin-bottom:1rem">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">MongoDB</span>
+          </div>
+          <span class="project-link">View on GitHub →</span>
+        </div>
+      </a>
+
+      <a class="project-card fade-up" href="https://github.com/davidkankowski" target="_blank">
+        <div class="project-thumb-placeholder">
+          <span class="thumb-label">PROJECT TWO</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Machine Learning <span class="project-date">2024</span></div>
+          <h3>Your Second Project</h3>
+          <p class="project-desc">
+            Another project placeholder. Add a screenshot or thumbnail image
+            by swapping the placeholder div with an &lt;img&gt; tag.
+          </p>
+          <div class="tag-row" style="margin-bottom:1rem">
+            <span class="tag">Python</span>
+            <span class="tag">scikit-learn</span>
+            <span class="tag">Pandas</span>
+          </div>
+          <span class="project-link">View on GitHub →</span>
+        </div>
+      </a>
+
+      <a class="project-card fade-up" href="https://github.com/davidkankowski" target="_blank">
+        <div class="project-thumb-placeholder">
+          <span class="thumb-label">PROJECT THREE</span>
+        </div>
+        <div class="project-body">
+          <div class="project-category">Systems / CLI <span class="project-date">2024</span></div>
+          <h3>Your Third Project</h3>
+          <p class="project-desc">
+            A third project. Feel free to add or remove cards to match your
+            actual number of featured projects.
+          </p>
+          <div class="tag-row" style="margin-bottom:1rem">
+            <span class="tag">C++</span>
+            <span class="tag">Linux</span>
+          </div>
+          <span class="project-link">View on GitHub →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+</div>
+
+<!-- SKILLS -->
+<div class="container">
+  <section id="skills">
+    <p class="section-title">Skills</p>
+    <div class="skill-groups fade-up">
+      <div class="skill-group">
+        <h3>Languages & Frameworks</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">TypeScript</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">Node.js</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Tools & Platforms</h3>
+        <div class="skill-pills">
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">GitHub</span>
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">Linux</span>
+          <span class="skill-pill">PostgreSQL</span>
+          <span class="skill-pill">AWS</span>
+          <span class="skill-pill">VS Code</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="container">
+  <section id="contact">
+    <p class="section-title">Get in touch</p>
+    <p class="contact-lead fade-up">
+      Open to new grad roles, internships, and interesting side projects.
+      Always happy to connect.
+    </p>
+    <div class="contact-links fade-up">
+      <a class="contact-card" href="mailto:your@email.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">your@email.com →</span>
+      </a>
+      <a class="contact-card" href="https://github.com/davidkankowski" target="_blank">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">davidkankowski ↗</span>
+      </a>
+      <a class="contact-card" href="https://linkedin.com/in/yourhandle" target="_blank">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">your-linkedin ↗</span>
+      </a>
+      <a class="contact-card" href="resume.pdf" target="_blank">
+        <span class="contact-label">Resume</span>
+        <span class="contact-value">Download PDF ↓</span>
+      </a>
+    </div>
+  </section>
+</div>
+
+<footer>© 2026 David Kankowski</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add('visible');
+    });
+  });
+</script>
+
+</body>
+</html>
